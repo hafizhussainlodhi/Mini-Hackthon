@@ -6,9 +6,9 @@
     }
 
 
-body.dark-mode a {
-  color: #bb86fc;
-}
+    body.dark-mode a {
+      color: #bb86fc;
+    }
 
     body {
       background: linear-gradient(#eef0ff, #ffffff);
@@ -351,6 +351,3 @@ body.dark-mode a {
 
 
     /* post ka form */
-
-
-    

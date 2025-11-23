@@ -73,15 +73,15 @@ const modeToggle = document.getElementById("modeToggle");
 const body = document.body;
 
 modeToggle.addEventListener("click", () => {
-  body.classList.toggle("dark-mode");
+    body.classList.toggle("dark-mode");
 
-  if(body.classList.contains("dark-mode")) {
-    modeToggle.textContent = "Light Mode";
-    modeToggle.style.background = "#333";
-    modeToggle.style.color = "#fff";
-  } else {
-    modeToggle.textContent = "Dark Mode";
-    modeToggle.style.background = "#fff";
-    modeToggle.style.color = "#000";
-  }
+    if (body.classList.contains("dark-mode")) {
+        modeToggle.textContent = "Light Mode";
+        modeToggle.style.background = "#333";
+        modeToggle.style.color = "#fff";
+    } else {
+        modeToggle.textContent = "Dark Mode";
+        modeToggle.style.background = "#fff";
+        modeToggle.style.color = "#000";
+    }
 });

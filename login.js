@@ -19,7 +19,7 @@ loginBtn.addEventListener("click", () => {
 
     let allUsers = JSON.parse(localStorage.getItem("allUsers")) || [];
 
-    let isExists = allUsers.find(userData => 
+    let isExists = allUsers.find(userData =>
         userData.email === emailLogin.value && userData.password === passwordLogin.value
     );
 

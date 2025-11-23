@@ -1,402 +1,413 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connectify - Social Feed</title>
-    
+    <title>Posts</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
+
     <style>
-/* -------------------- CSS RESET & GLOBAL -------------------- */
+        /* -------------------- CSS RESET & GLOBAL -------------------- */
 
-*, *::before, *::after {
-    box-sizing: border-box;
-}
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #f0f2f5; 
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-}
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
 
-/* -------------------- HEADER / NAVIGATION BAR -------------------- */
-#headerBar {
-    width: 100%;
-    min-height: 56px; 
-    background-color: #ffffff; 
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); 
-    position: sticky; 
-    top: 0;
-    z-index: 1000;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 20px; 
-    margin-bottom: 20px; 
-}
+        /* -------------------- HEADER / NAVIGATION BAR -------------------- */
+        #headerBar {
+            width: 100%;
+            min-height: 56px;
+            background-color: #ffffff;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 20px;
+            margin-bottom: 20px;
+        }
 
-#headerBar h1 {
-    color: #1877f2; 
-    font-size: 28px; 
-    font-weight: 700;
-    margin: 0;
-}
+        #headerBar h1 {
+            color: #1877f2;
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+        }
 
-#headerControls {
-    display: flex;
-    gap: 10px;
-}
+        #headerControls {
+            display: flex;
+            gap: 10px;
+        }
 
-#logoutBtn, #modeToggle {
-    border: none; 
-    padding: 8px 12px;
-    border-radius: 50px; 
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 600;
-    background: #e4e6eb; 
-    color: #050505;
-    transition: background-color 0.2s;
-}
+        #logoutBtn,
+        #modeToggle {
+            border: none;
+            padding: 8px 12px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            background: #e4e6eb;
+            color: #050505;
+            transition: background-color 0.2s;
+        }
 
-#modeToggle {
-    background: #1877f2; 
-    color: white;
-}
+        #modeToggle {
+            background: #1877f2;
+            color: white;
+        }
 
-/* -------------------- DARK MODE 🌙 -------------------- */
-body.dark-mode {
-    background: #18191a; 
-    color: #e4e6eb; 
-}
+        /* -------------------- DARK MODE 🌙 -------------------- */
+        body.dark-mode {
+            background: #18191a;
+            color: #e4e6eb;
+        }
 
-body.dark-mode #headerBar {
-    background-color: #242526;
-    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
-}
+        body.dark-mode #headerBar {
+            background-color: #242526;
+            box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
+        }
 
-body.dark-mode #logoutBtn, body.dark-mode #modeToggle {
-    background: #3a3b3c;
-    color: #e4e6eb;
-}
+        body.dark-mode #logoutBtn,
+        body.dark-mode #modeToggle {
+            background: #3a3b3c;
+            color: #e4e6eb;
+        }
 
-body.dark-mode .post-box, body.dark-mode #createPost {
-    background: #242526;
-    box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
-}
+        body.dark-mode .post-box,
+        body.dark-mode #createPost {
+            background: #242526;
+            box-shadow: 0 1px 3px rgba(255, 255, 255, 0.1);
+        }
 
-body.dark-mode #postInput, body.dark-mode #imgInput {
-    background: #3a3b3c;
-    border: 1px solid #4e4f50;
-    color: #e4e6eb;
-}
+        body.dark-mode #postInput,
+        body.dark-mode #imgInput {
+            background: #3a3b3c;
+            border: 1px solid #4e4f50;
+            color: #e4e6eb;
+        }
 
-body.dark-mode .post-info h3, body.dark-mode p {
-    color: #e4e6eb !important;
-}
+        body.dark-mode .post-info h3,
+        body.dark-mode p {
+            color: #e4e6eb !important;
+        }
 
-body.dark-mode .post-actions button {
-    color: #b0b3b8 !important;
-}
+        body.dark-mode .post-actions button {
+            color: #b0b3b8 !important;
+        }
 
-body.dark-mode .post-actions button:hover {
-    background-color: #3a3b3c !important;
-}
+        body.dark-mode .post-actions button:hover {
+            background-color: #3a3b3c !important;
+        }
 
-/* -------------------- MAIN CONTENT LAYOUT -------------------- */
-main {
-    padding: 0 20px 20px;
-    width: 100%;
-    max-width: 680px; 
-}
+        /* -------------------- MAIN CONTENT LAYOUT -------------------- */
+        main {
+            padding: 0 20px 20px;
+            width: 100%;
+            max-width: 680px;
+        }
 
-#searchBar,
-#createPost,
-#feed {
-    width: 100%;
-    margin-bottom: 20px;
-}
+        #searchBar,
+        #createPost,
+        #feed {
+            width: 100%;
+            margin-bottom: 20px;
+        }
 
-/* -------------------- SEARCH BAR 🔍 (ICON MOVED TO RIGHT) -------------------- */
-#searchBar {
-    position: relative; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 600px; 
-    margin: 0 auto 20px auto; 
-    padding: 0 10px;
-}
+        /* -------------------- SEARCH BAR 🔍 (ICON MOVED TO RIGHT) -------------------- */
+        #searchBar {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            max-width: 600px;
+            margin: 0 auto 20px auto;
+            padding: 0 10px;
+        }
 
-#searchBar input {
-    flex: 1;
-    width: 100%;
-    max-width: 500px;
-    padding: 12px 15px;
-    /* Right padding badhaya taaki icon adjust ho sake */
-    padding-right: 40px; 
-    border-radius: 50px; 
-    border: none; 
-    font-size: 16px;
-    background-color: #e4e6eb; 
-    text-align: left;
-}
+        #searchBar input {
+            flex: 1;
+            width: 100%;
+            max-width: 500px;
+            padding: 12px 15px;
+            /* Right padding badhaya taaki icon adjust ho sake */
+            padding-right: 40px;
+            border-radius: 50px;
+            border: none;
+            font-size: 16px;
+            background-color: #e4e6eb;
+            text-align: left;
+        }
 
-#searchBar button {
-    display: block;
-    position: absolute;
-    
-    /* Right side par position kiya */
-    right: 20px; 
-    left: auto; 
-    
-    top: 50%;
-    transform: translateY(-50%);
+        #searchBar button {
+            display: block;
+            position: absolute;
 
-    background-color: transparent;
-    color: #606770; 
-    cursor: default; 
-    border: none;
-    z-index: 10;
-    padding: 0;
-    margin: 0;
-    font-size: 16px;
-}
+            /* Right side par position kiya */
+            right: 20px;
+            left: auto;
 
-/* -------------------- DARK MODE SEARCH BAR 🌙 -------------------- */
-body.dark-mode #searchBar input {
-    background: #3a3b3c;
-    border: 1px solid #4e4f50;
-    color: #e4e6eb;
-}
+            top: 50%;
+            transform: translateY(-50%);
 
-body.dark-mode #searchBar button {
-    color: #b0b3b8;
-}
+            background-color: transparent;
+            color: #606770;
+            cursor: default;
+            border: none;
+            z-index: 10;
+            padding: 0;
+            margin: 0;
+            font-size: 16px;
+        }
 
-/* -------------------- CREATE POST ✍️ -------------------- */
-#createPost {
-    background: #fff;
-    padding: 15px;
-    border-radius: 8px; 
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); 
-}
+        /* -------------------- DARK MODE SEARCH BAR 🌙 -------------------- */
+        body.dark-mode #searchBar input {
+            background: #3a3b3c;
+            border: 1px solid #4e4f50;
+            color: #e4e6eb;
+        }
 
-#createPost .post-header {
-    margin-bottom: 10px;
-    display: flex; /* Added flex for header alignment */
-    align-items: center;
-}
+        body.dark-mode #searchBar button {
+            color: #b0b3b8;
+        }
 
-#createPost h2 {
-    font-size: 16px;
-    color: #606770;
-    font-weight: 400;
-    margin: 0;
-    flex-grow: 1;
-}
+        /* -------------------- CREATE POST ✍️ -------------------- */
+        #createPost {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
 
-#postInput {
-    width: 100%;
-    padding: 10px 0; 
-    border: none; 
-    border-bottom: 1px solid #ddd; 
-    resize: none;
-    font-size: 16px;
-    min-height: 80px;
-    background-color: transparent;
-    margin-bottom: 10px;
-}
+        #createPost .post-header {
+            margin-bottom: 10px;
+            display: flex;
+            /* Added flex for header alignment */
+            align-items: center;
+        }
 
-#imgInput {
-    width: 100%;
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    font-size: 14px;
-}
+        #createPost h2 {
+            font-size: 16px;
+            color: #606770;
+            font-weight: 400;
+            margin: 0;
+            flex-grow: 1;
+        }
 
-#emojiBox {
-    margin: 15px 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between; 
-}
+        #postInput {
+            width: 100%;
+            padding: 10px 0;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            resize: none;
+            font-size: 16px;
+            min-height: 80px;
+            background-color: transparent;
+            margin-bottom: 10px;
+        }
 
-#emojiBox span {
-    cursor: pointer;
-    font-size: 24px;
-    margin-right: 12px;
-    transition: transform 0.2s;
-}
+        #imgInput {
+            width: 100%;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
 
-#postButton {
-    padding: 10px;
-    background-color: #1877f2; 
-    color: white;
-    font-weight: bold;
-    border-radius: 6px; 
-    border: none;
-    cursor: pointer;
-    width: 30%; 
-}
+        #emojiBox {
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
 
-/* -------------------- FEED 📰 -------------------- */
-.post-box {
-    background: #fff;
-    border-radius: 8px; 
-    padding: 15px;
-    margin-bottom: 15px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
+        #emojiBox span {
+            cursor: pointer;
+            font-size: 24px;
+            margin-right: 12px;
+            transition: transform 0.2s;
+        }
 
-.post-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
+        #postButton {
+            padding: 10px;
+            background-color: #1877f2;
+            color: white;
+            font-weight: bold;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            width: 30%;
+        }
 
-.profile-pic {
-    width: 40px;
-    height: 40px;
-    background: #1877f2; 
-    border-radius: 50%;
-    margin-right: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 18px;
-    color: white;
-}
+        /* -------------------- FEED 📰 -------------------- */
+        .post-box {
+            background: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
 
-.post-info h3 {
-    margin: 0;
-    font-size: 15px;
-    color: #050505;
-    font-weight: 600;
-}
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
 
-.post-info small {
-    display: block;
-    color: #606770; 
-    font-size: 12px;
-}
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            background: #1877f2;
+            border-radius: 50%;
+            margin-right: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            color: white;
+        }
 
-.post-box p {
-    margin: 5px 0 10px 0;
-    font-size: 15px;
-    color: #1c1e21;
-}
+        .post-info h3 {
+            margin: 0;
+            font-size: 15px;
+            color: #050505;
+            font-weight: 600;
+        }
 
-.post-box img {
-    margin: 10px -15px; 
-    width: calc(100% + 30px);
-    max-height: 400px;
-    border-radius: 0;
-    object-fit: cover;
-}
+        .post-info small {
+            display: block;
+            color: #606770;
+            font-size: 12px;
+        }
+
+        .post-box p {
+            margin: 5px 0 10px 0;
+            font-size: 15px;
+            color: #1c1e21;
+        }
+
+        .post-box img {
+            margin: 10px -15px;
+            width: calc(100% + 30px);
+            max-height: 400px;
+            border-radius: 0;
+            object-fit: cover;
+        }
 
 
-.post-engagement {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    color: #606770;
-    margin-bottom: 10px;
-    padding-bottom: 5px;
-    border-bottom: 1px solid #e4e6eb; 
-}
+        .post-engagement {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: #606770;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e4e6eb;
+        }
 
-.post-actions {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 5px;
-}
+        .post-actions {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 5px;
+        }
 
-.post-actions button {
-    flex: 1;
-    margin: 0 5px;
-    background-color: transparent !important; 
-    color: #606770 !important; 
-    font-size: 14px;
-    font-weight: 600;
-    padding: 8px;
-    border-radius: 6px;
-    display: flex; 
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    border: none;
-    cursor: pointer;
-}
+        .post-actions button {
+            flex: 1;
+            margin: 0 5px;
+            background-color: transparent !important;
+            color: #606770 !important;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 8px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            border: none;
+            cursor: pointer;
+        }
 
-.post-actions button:hover {
-    background-color: #f2f2f2 !important;
-}
+        .post-actions button:hover {
+            background-color: #f2f2f2 !important;
+        }
 
-.post-actions button.like.liked {
-    color: #1877f2 !important; 
-}
+        .post-actions button.like.liked {
+            color: #1877f2 !important;
+        }
 
-/* -------------------- RESPONSIVE 📱 -------------------- */
+        /* -------------------- RESPONSIVE 📱 -------------------- */
 
-@media (max-width: 680px) {
-    main {
-        padding: 0 10px 10px;
-    }
-}
+        @media (max-width: 680px) {
+            main {
+                padding: 0 10px 10px;
+            }
+        }
 
-@media (max-width: 480px) {
-    #headerBar {
-        padding: 8px 10px;
-    }
-    
-    #headerBar h1 {
-        font-size: 24px;
-    }
-    
-    #searchBar input {
-        padding: 10px 15px;
-        padding-right: 35px; /* Mobile par thoda kam padding */
-    }
+        @media (max-width: 480px) {
+            #headerBar {
+                padding: 8px 10px;
+            }
 
-    #searchBar button {
-        right: 15px; /* Icon ko bhi adjust kiya */
-        font-size: 14px;
-    }
-    
-    .post-actions button {
-        font-size: 13px;
-        padding: 8px 5px;
-    }
+            #headerBar h1 {
+                font-size: 24px;
+            }
 
-    .post-box img {
-        margin: 10px -15px; 
-        width: calc(100% + 30px);
-    }
-    
-    #postButton {
-        width: 40%;
-    }
-}
+            #searchBar input {
+                padding: 10px 15px;
+                padding-right: 35px;
+                /* Mobile par thoda kam padding */
+            }
+
+            #searchBar button {
+                right: 15px;
+                /* Icon ko bhi adjust kiya */
+                font-size: 14px;
+            }
+
+            .post-actions button {
+                font-size: 13px;
+                padding: 8px 5px;
+            }
+
+            .post-box img {
+                margin: 10px -15px;
+                width: calc(100% + 30px);
+            }
+
+            #postButton {
+                width: 40%;
+            }
+        }
     </style>
 </head>
 
 <body>
     <header id="headerBar">
-        <h1>Connectify</h1> 
+        <h1>Connectify</h1>
         <div id="headerControls">
             <button id="modeToggle"><i class="fas fa-moon"></i> Mode</button>
             <button id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
         </div>
     </header>
-    
+
     <main>
         <div id="searchBar">
             <input type="text" id="searchInput" placeholder="Search Connectify...">
@@ -408,7 +419,7 @@ body.dark-mode #searchBar button {
                 <div class="profile-pic">👤</div>
                 <h2 style="font-weight: 400; margin-left: 10px;">What's on your mind?</h2>
             </div>
-            
+
             <textarea id="postInput" rows="3" placeholder="Share a post, photo, or video..."></textarea>
             <input type="text" id="imgInput" placeholder="Add Photo/Video URL (optional)" />
 
@@ -429,7 +440,8 @@ body.dark-mode #searchBar button {
                 <div class="post-header">
                     <div class="profile-pic" style="background: #e91e63;">P</div>
                     <div class="post-info">
-                        <h3>Priya Sharma <i class="fas fa-check-circle" style="color: #1877f2; font-size: 12px;"></i></h3>
+                        <h3>Priya Sharma <i class="fas fa-check-circle" style="color: #1877f2; font-size: 12px;"></i>
+                        </h3>
                         <small>5 minutes ago</small>
                     </div>
                 </div>
@@ -485,4 +497,5 @@ body.dark-mode #searchBar button {
     </main>
 </body>
 <script src="post.js"></script>
+
 </html>
